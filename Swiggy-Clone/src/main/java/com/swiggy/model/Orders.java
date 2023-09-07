@@ -30,8 +30,6 @@ public class Orders {// owning side
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Customer customer;
 	
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	private Restaurant restaurant;
 		
 	@ManyToOne(cascade = CascadeType.ALL)
 	private DeliveryPartner deliveryPartner;
