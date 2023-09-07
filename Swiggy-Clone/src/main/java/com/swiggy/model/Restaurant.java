@@ -32,7 +32,7 @@ public class Restaurant {
 	@NotBlank(message = "Address can't be empty")
 	private String address;
 	
-	@JsonIgnore
+	@JsonIgnore 
 	@OneToMany(mappedBy = "restaurant")
 	private List<Orders> orderList = new ArrayList<>();
 	
