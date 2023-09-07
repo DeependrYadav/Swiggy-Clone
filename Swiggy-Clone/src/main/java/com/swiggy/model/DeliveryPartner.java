@@ -33,7 +33,9 @@ public class DeliveryPartner {
 	@Pattern(regexp = "^[6-9][0-9]{9}",message = "Provide valid mobile number")
 	private String phoneNumber;
 	
-
+	@JsonIgnore
+	@OneToMany(mappedBy = "deliveryPartner")
+	private List<Orders> orderList = new ArrayList<>();
 	
 	public DeliveryPartner(
 			@NotBlank(message = "Name can't be empty") @NotNull(message = "Name can't be null") String name,

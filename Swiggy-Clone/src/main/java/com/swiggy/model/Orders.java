@@ -30,6 +30,8 @@ public class Orders {// owning side
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Customer customer;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Restaurant restaurant;
 		
 	@ManyToOne(cascade = CascadeType.ALL)
 	private DeliveryPartner deliveryPartner;
@@ -41,10 +43,11 @@ public class Orders {// owning side
 	private OrderStatus orderStatus;
 
 	public Orders(@NotNull(message = "Provide order Id") Customer customer,
-			 DeliveryPartner deliveryPartner,
+			@NotNull(message = "Provide resturant Id") Restaurant restaurant, DeliveryPartner deliveryPartner,
 			List<String> items, OrderStatus orderStatus) {
 		super();
 		this.customer = customer;
+		this.restaurant = restaurant;
 		this.deliveryPartner = deliveryPartner;
 		this.items = items;
 		this.orderStatus = orderStatus;
