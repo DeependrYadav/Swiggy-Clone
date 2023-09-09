@@ -32,6 +32,9 @@ public class OrdersServiceImpl implements OrdersService{
 	@Autowired
 	private RestaurantRepository rr;
 
+	@Autowired
+	private DeliveryPartnerRepository dpr;
+	
 	@Override
 	public Orders placeOrder(Integer customerId,Integer restaurantId,@Valid Orders order) {
 //		System.out.println("Inside");
@@ -57,5 +60,20 @@ public class OrdersServiceImpl implements OrdersService{
 		return or.findAll();
 	}
 
+	@Override
+	public Orders assignDeliveryPartner(Integer orderId, Integer deliveryPartnerId) {
+		
+		Orders ord = or.findById(orderId).orElseThrow(()->new SwiggyException("Order ID is invalid"));
+		
+		if (ord.getOrderStatus() == OrderStatus.delivered) throw new SwiggyException("Order Status is completed");
+		
+		if (ord.getDeliveryPartner()!= null) throw new SwiggyException("Delivery Partner is already assigned");
+
+		DeliveryPartner dp = dpr.findById(deliveryPartnerId).orElseThrow(()->new SwiggyException("Delivery Partner ID is invalid"));
+
+		ord.setDeliveryPartner(dp);
+
+		return or.save(ord);
+	}
 	
 }
