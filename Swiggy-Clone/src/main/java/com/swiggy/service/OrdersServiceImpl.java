@@ -81,8 +81,9 @@ public class OrdersServiceImpl implements OrdersService{
 		
 		Orders ord = or.findById(orderId).orElseThrow(()->new SwiggyException("Order ID is invalid"));
 		
-		if(ord.getOrderStatus().compareTo(os) <= 0)throw new SwiggyException("Invalid order status transitions");
+		if(ord.getOrderStatus().compareTo(os) >= 0)throw new SwiggyException("Invalid order status transitions");
 
+		
 		ord.setOrderStatus(os);
 		
 		return or.save(ord);
