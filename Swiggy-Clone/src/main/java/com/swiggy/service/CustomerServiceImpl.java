@@ -24,26 +24,27 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+	public List<Customer> getCustomerByPageWise(Integer pageNumber, Integer recordsPerPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<Customer> getCustomers() {
 		return cr.findAll();
 	}
 
 	@Override
-	public List<Customer> getCustomerByPageWise(Integer pageNumber, Integer recordsPerPage) {
-		Pageable page = PageRequest.of(pageNumber, recordsPerPage);
-		return cr.findAll(page).getContent();
-	}
-
-	@Override
 	public List<Customer> getCustomerBySorting(String field, String direction) {
-		Sort sort = null;
-		if(direction.equalsIgnoreCase("ASC"))sort = Sort.by(Sort.Direction.ASC, field);
-		else sort = Sort.by(Sort.Direction.DESC, field);
-		return cr.findAll(sort);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Customer getCustomerByEmail(String email) {
-		return cr.findByEmail(email).orElseThrow( () -> new SwiggyException("No customer found with this email "+email));
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+
 }
