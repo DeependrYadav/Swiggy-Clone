@@ -88,5 +88,24 @@ public class OrdersServiceImpl implements OrdersService{
 		
 		return or.save(ord);
 	}
-	
+
+	@Override
+	public List<Orders> orderHistory(Integer customerId) {
+		Customer cus = cr.findById(customerId).orElseThrow(()->new SwiggyException("Customer ID is invalid"));
+		return cus.getOrderList();
+	}
+
+	@Override
+	public List<Orders> getOrdersPageWise(Integer pageNumber, Integer recordsPerPage) {
+		Pageable pageable = PageRequest.of(pageNumber, recordsPerPage);
+		return or.findAll(pageable).getContent();
+	}
+
+	@Override
+	public List<Orders> getOrdersBySorting(String field, String direction) {
+		Sort sort = null;
+		if(direction.equalsIgnoreCase("ASC"))sort = Sort.by(Sort.Direction.ASC, field);
+		else sort = Sort.by(Sort.Direction.DESC, field);
+		return or.findAll(sort);
+	}
 }
