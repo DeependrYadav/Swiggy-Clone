@@ -22,6 +22,12 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyExceptionClass>(mec,HttpStatus.BAD_REQUEST);
 	}
 	
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public ResponseEntity<MyExceptionClass> myException(NoHandlerFoundException ex,WebRequest web){
+		MyExceptionClass mec = new MyExceptionClass(ex.getMessage(), web.getDescription(false), LocalDateTime.now());
+		
+		return new ResponseEntity<MyExceptionClass>(mec,HttpStatus.BAD_REQUEST);
+	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<MyExceptionClass> myException(MethodArgumentNotValidException ex,WebRequest web){
