@@ -25,8 +25,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> getCustomerByPageWise(Integer pageNumber, Integer recordsPerPage) {
-		// TODO Auto-generated method stub
-		return null;
+		Pageable page = PageRequest.of(pageNumber, recordsPerPage);
+		return cr.findAll(page).getContent();
 	}
 
 	@Override
@@ -36,8 +36,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> getCustomerBySorting(String field, String direction) {
-		// TODO Auto-generated method stub
-		return null;
+		Sort sort = null;
+		if(direction.equalsIgnoreCase("ASC"))sort = Sort.by(Sort.Direction.ASC, field);
+		else sort = Sort.by(Sort.Direction.DESC, field);
+		return cr.findAll(sort);
 	}
 
 	@Override

@@ -22,6 +22,7 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyExceptionClass>(mec,HttpStatus.BAD_REQUEST);
 	}
 	
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<MyExceptionClass> myException(MethodArgumentNotValidException ex,WebRequest web){
 		MyExceptionClass mec = new MyExceptionClass("Valiation Failed", web.getDescription(false), LocalDateTime.now());
