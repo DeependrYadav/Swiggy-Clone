@@ -24,6 +24,8 @@ import jakarta.validation.Valid;
 public class CustomerController {
 
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
 	private CustomerService cs;
 	
 	//End point: http://localhost:8088/
@@ -31,6 +33,8 @@ public class CustomerController {
 	@PostMapping(value = "/customers")
 	public ResponseEntity<Customer> addCustomer(@Valid @RequestBody Customer cus){
 		
+		cus.setPassword(passwordEncoder.encode(cus.getPassword()));
+		cus.setRole("ROLE_"+cus.getRole().toUpperCase());
 		return new ResponseEntity<Customer>(cs.addCustomer(cus),HttpStatus.OK);
 	}
 	
