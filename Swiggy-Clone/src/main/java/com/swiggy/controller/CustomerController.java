@@ -20,7 +20,6 @@ import com.swiggy.service.CustomerService;
 
 import jakarta.validation.Valid;
 @RestController
-@CrossOrigin("*")
 public class CustomerController {
 /*
 {
