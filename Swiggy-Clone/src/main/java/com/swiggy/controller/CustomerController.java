@@ -22,7 +22,30 @@ import jakarta.validation.Valid;
 @RestController
 @CrossOrigin("*")
 public class CustomerController {
-
+/*
+{
+	"name": "ram",
+    "email": "ram@gmail.com",
+    "password": "123456789",
+    "address": "delhi",
+    "role": "admin"
+}
+{
+	"name": "Ashok",
+	"email": "ashok@gamil.com",
+	"address": "Jaipur",
+	"password":"deependra",
+	"role":"ADMIN"
+}
+{
+    "customerId": 3,
+    "name": "Shivam",
+    "email": "shivam@gamil.com",
+    "address": "Jaipur",
+    "role": "ROLE_USER"
+    "password":"shivam123"
+}
+*/
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
