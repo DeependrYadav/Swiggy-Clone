@@ -70,5 +70,8 @@ public class Config {
 		return http.build();
 	}
 	
-
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }
