@@ -64,6 +64,8 @@ public class Config {
 		
 		
 		.csrf(csrf -> csrf.disable())
+		.addFilterAfter(new JwtTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+		.addFilterBefore(new JwtTokenValidatorFilter(), BasicAuthenticationFilter.class)
 		.formLogin(Customizer.withDefaults())
 		.httpBasic(Customizer.withDefaults());
 		
