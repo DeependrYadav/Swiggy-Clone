@@ -48,4 +48,14 @@ public class CustomerController {
 	public ResponseEntity<List<Customer>> getCustomerBySorting(@PathVariable String field,@PathVariable String direction){
 		return new ResponseEntity<List<Customer>>(cs.getCustomerBySorting(field,direction),HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/signIn")
+	public ResponseEntity<String> getCustomerByEmail(Authentication auth){
+		
+//		System.out.println(auth);
+		
+		Customer cus = cs.getCustomerByEmail(auth.getName());
+		
+		return new ResponseEntity<String>(cus.getName()+" Logged In Successfully ",HttpStatus.ACCEPTED);
+	}
 }
