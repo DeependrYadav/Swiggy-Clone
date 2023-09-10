@@ -20,9 +20,33 @@ import com.swiggy.service.CustomerService;
 
 import jakarta.validation.Valid;
 @RestController
-@CrossOrigin("*")
 public class CustomerController {
-
+/*
+{
+	"name": "ram",
+    "email": "ram@gmail.com",
+    "password": "123456789",
+    "address": "delhi",
+    "role": "admin"
+}
+{
+	"name": "Ashok",
+	"email": "ashok@gamil.com",
+	"address": "Jaipur",
+	"password":"deependra",
+	"role":"ADMIN"
+}
+{
+    "customerId": 3,
+    "name": "Shivam",
+    "email": "shivam@gamil.com",
+    "address": "Jaipur",
+    "role": "ROLE_USER"
+    "password":"shivam123"
+}
+*/
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private CustomerService cs;
 	
@@ -31,6 +55,8 @@ public class CustomerController {
 	@PostMapping(value = "/customers")
 	public ResponseEntity<Customer> addCustomer(@Valid @RequestBody Customer cus){
 		
+		cus.setPassword(passwordEncoder.encode(cus.getPassword()));
+		cus.setRole("ROLE_"+cus.getRole().toUpperCase());
 		return new ResponseEntity<Customer>(cs.addCustomer(cus),HttpStatus.OK);
 	}
 	
@@ -47,5 +73,15 @@ public class CustomerController {
 	@GetMapping(value = "/customers_by_sort/{field}/{direction}")
 	public ResponseEntity<List<Customer>> getCustomerBySorting(@PathVariable String field,@PathVariable String direction){
 		return new ResponseEntity<List<Customer>>(cs.getCustomerBySorting(field,direction),HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/signIn")
+	public ResponseEntity<String> getCustomerByEmail(Authentication auth){
+		
+//		System.out.println(auth);
+		
+		Customer cus = cs.getCustomerByEmail(auth.getName());
+		
+		return new ResponseEntity<String>(cus.getName()+" Logged In Successfully ",HttpStatus.ACCEPTED);
 	}
 }
