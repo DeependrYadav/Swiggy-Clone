@@ -42,11 +42,13 @@ public class OrdersController {
 		return new ResponseEntity<List<Orders>>(os.getOrder(page,size,sort,order),HttpStatus.OK);
 	}
 	
+	@Deprecated
 	@GetMapping(value = "/orders_by_page/{pageNumber}/{recordsPerPage}")
 	public ResponseEntity<List<Orders>> getOrdersPageWise(@PathVariable Integer pageNumber, @PathVariable Integer recordsPerPage){
 		return new ResponseEntity<List<Orders>>(os.getOrdersPageWise(pageNumber,recordsPerPage),HttpStatus.OK);
 	}
 	
+	@Deprecated
 	@GetMapping(value = "/orders_by_sort/{field}/{direction}")
 	public ResponseEntity<List<Orders>> getOrdersBySort(@PathVariable String field, @PathVariable String direction){
 		return new ResponseEntity<List<Orders>>(os.getOrdersBySorting(field,direction),HttpStatus.OK);

@@ -14,7 +14,10 @@ public interface OrdersService {
 	public Orders updateOrderStatus(Integer orderId, OrderStatus os);
 	public List<Orders> orderHistory(Integer customerId);
 	public List<Orders> getOrder(Integer page,Integer size,String sort,String order);
+	
+	@Deprecated
 	public List<Orders> getOrdersPageWise(Integer pageNumber, Integer recordsPerPage);
+	@Deprecated
 	public List<Orders> getOrdersBySorting(String field, String direction);
 	
 }

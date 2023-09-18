@@ -114,12 +114,14 @@ public class OrdersServiceImpl implements OrdersService{
 		return cus.getOrderList();
 	}
 
+	@Deprecated
 	@Override
 	public List<Orders> getOrdersPageWise(Integer pageNumber, Integer recordsPerPage) {
 		Pageable pageable = PageRequest.of(pageNumber, recordsPerPage);
 		return or.findAll(pageable).getContent();
 	}
 
+	@Deprecated
 	@Override
 	public List<Orders> getOrdersBySorting(String field, String direction) {
 		Sort sort = null;

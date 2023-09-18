@@ -39,10 +39,12 @@ public class DeliveryPartnerController {
 		return new ResponseEntity<List<DeliveryPartner>>(dps.getAllDeliveryPartner(page,size,sort,order),HttpStatus.OK);
 	}
 	
+	@Deprecated
 	@GetMapping(value = "/deliveryPartners_by_page/{pageNumber}/{recordsPerPage}")
 	public ResponseEntity<List<DeliveryPartner>> getDeliveryPartnerPageWise(@PathVariable Integer pageNumber, @PathVariable Integer recordsPerPage){
 		return new ResponseEntity<List<DeliveryPartner>>(dps.getDeliveryPartnerPageWise(pageNumber,recordsPerPage),HttpStatus.OK);
 	}
+	@Deprecated
 	@GetMapping(value = "/deliveryPartners_by_sorting/{field}/{direction}")
 	public ResponseEntity<List<DeliveryPartner>> getDeliveryPartnerBySorting(@PathVariable String field, @PathVariable String direction){
 		return new ResponseEntity<List<DeliveryPartner>>(dps.getDeliveryPartnerBySorting(field,direction),HttpStatus.OK);
