@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swiggy.model.Customer;
@@ -25,7 +26,7 @@ public class CustomerController {
 {
 	"name": "ram",
     "email": "ram@gmail.com",
-    "password": "123456789",
+    "password": "ram1234",
     "address": "delhi",
     "role": "admin"
 }
@@ -33,16 +34,22 @@ public class CustomerController {
 	"name": "Ashok",
 	"email": "ashok@gamil.com",
 	"address": "Jaipur",
-	"password":"deependra",
+	"password":"ashok1234",
 	"role":"ADMIN"
 }
 {
-    "customerId": 3,
     "name": "Shivam",
     "email": "shivam@gamil.com",
     "address": "Jaipur",
-    "role": "ROLE_USER"
-    "password":"shivam123"
+    "role": "USER",
+    "password":"shivam1234"
+}
+{
+    "name":"luffy",
+    "password":"luffy1234",
+    "email":"luffy@gmail.com",
+    "address":"sea",
+    "role":"admin"
 }
 */
 	@Autowired
@@ -61,19 +68,24 @@ public class CustomerController {
 	}
 	
 	@GetMapping(value = "/customers")
-	public ResponseEntity<List<Customer>> getCustomers(){
-		return new ResponseEntity<List<Customer>>(cs.getCustomers(),HttpStatus.OK);
+	public ResponseEntity<List<Customer>> getCustomers(
+			@RequestParam(name = "page",required = false) Integer page,
+			@RequestParam(name = "size",required = false) Integer size,
+			@RequestParam(name = "sort",required = false) String sort,
+			@RequestParam(name = "order",required = false) String order
+			){
+		return new ResponseEntity<List<Customer>>(cs.getCustomers(page,size,sort,order),HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/customers_by_page/{pageNumber}/{recordsPerPage}")
-	public ResponseEntity<List<Customer>> getCustomerByPageWise(@PathVariable Integer pageNumber,@PathVariable Integer recordsPerPage){
-		return new ResponseEntity<List<Customer>>(cs.getCustomerByPageWise(pageNumber,recordsPerPage),HttpStatus.OK);
-	}
-
-	@GetMapping(value = "/customers_by_sort/{field}/{direction}")
-	public ResponseEntity<List<Customer>> getCustomerBySorting(@PathVariable String field,@PathVariable String direction){
-		return new ResponseEntity<List<Customer>>(cs.getCustomerBySorting(field,direction),HttpStatus.OK);
-	}
+//	@GetMapping(value = "/customers_by_page/{pageNumber}/{recordsPerPage}")
+//	public ResponseEntity<List<Customer>> getCustomerByPageWise(@PathVariable Integer pageNumber,@PathVariable Integer recordsPerPage){
+//		return new ResponseEntity<List<Customer>>(cs.getCustomerByPageWise(pageNumber,recordsPerPage),HttpStatus.OK);
+//	}
+//
+//	@GetMapping(value = "/customers_by_sort/{field}/{direction}")
+//	public ResponseEntity<List<Customer>> getCustomerBySorting(@PathVariable String field,@PathVariable String direction){
+//		return new ResponseEntity<List<Customer>>(cs.getCustomerBySorting(field,direction),HttpStatus.OK);
+//	}
 	
 	@GetMapping(value = "/signIn")
 	public ResponseEntity<String> getCustomerByEmail(Authentication auth){

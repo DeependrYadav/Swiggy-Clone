@@ -10,7 +10,7 @@ public interface CustomerService {
 	
 	public List<Customer> getCustomerByPageWise(Integer pageNumber, Integer recordsPerPage);
 	
-	public List<Customer> getCustomers();
+	public List<Customer> getCustomers(Integer page,Integer size,String sort,String order);
 
 	public List<Customer> getCustomerBySorting(String field, String direction);
 	

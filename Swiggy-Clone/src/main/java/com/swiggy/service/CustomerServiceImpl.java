@@ -30,8 +30,27 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Customer> getCustomers() {
-		return cr.findAll();
+	public List<Customer> getCustomers(Integer page,Integer size,String sort,String order) {
+		Sort sort1 = null;
+		Pageable pagination = null;
+		
+		if(page == null && sort == null)return cr.findAll();
+		
+		else if(page == null && sort != null) {
+			if(order.equalsIgnoreCase("asc"))sort1 = Sort.by(Sort.Direction.ASC,sort);
+			else sort1 = Sort.by(Sort.Direction.DESC,sort);
+			return cr.findAll(sort1);
+		}
+		else if(sort == null && page != null) {
+			 pagination = PageRequest.of(page, size);
+			 return cr.findAll(pagination).getContent();
+		}
+		else {
+			if(order.equalsIgnoreCase("asc"))sort1 = Sort.by(Sort.Direction.ASC,sort);
+			else sort1 = Sort.by(Sort.Direction.DESC,sort);
+			pagination = PageRequest.of(page, size,sort1);
+			return cr.findAll(pagination).getContent();
+		}
 	}
 
 	@Override
@@ -45,7 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer getCustomerByEmail(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return cr.findByEmail(email).orElseThrow(() -> new SwiggyException("Invalid email :"+email));
 	}
 
 
