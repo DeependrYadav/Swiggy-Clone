@@ -13,7 +13,7 @@ public interface OrdersService {
 	public Orders assignDeliveryPartner(Integer orderId, Integer deliveryPartnerId);
 	public Orders updateOrderStatus(Integer orderId, OrderStatus os);
 	public List<Orders> orderHistory(Integer customerId);
-	public List<Orders> getOrder();
+	public List<Orders> getOrder(Integer page,Integer size,String sort,String order);
 	public List<Orders> getOrdersPageWise(Integer pageNumber, Integer recordsPerPage);
 	public List<Orders> getOrdersBySorting(String field, String direction);
 	

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swiggy.model.OrderStatus;
@@ -32,13 +33,20 @@ public class OrdersController {
 	}
 
 	@GetMapping(value = "/orders")
-	public ResponseEntity<List<Orders>> getOrders(){
-		return new ResponseEntity<List<Orders>>(os.getOrder(),HttpStatus.OK);
+	public ResponseEntity<List<Orders>> getOrders(
+			@RequestParam(name = "page",required = false) Integer page,
+			@RequestParam(name = "size",required = false) Integer size,
+			@RequestParam(name = "sort",required = false) String sort,
+			@RequestParam(name = "order",required = false) String order
+			){
+		return new ResponseEntity<List<Orders>>(os.getOrder(page,size,sort,order),HttpStatus.OK);
 	}
+	
 	@GetMapping(value = "/orders_by_page/{pageNumber}/{recordsPerPage}")
 	public ResponseEntity<List<Orders>> getOrdersPageWise(@PathVariable Integer pageNumber, @PathVariable Integer recordsPerPage){
 		return new ResponseEntity<List<Orders>>(os.getOrdersPageWise(pageNumber,recordsPerPage),HttpStatus.OK);
 	}
+	
 	@GetMapping(value = "/orders_by_sort/{field}/{direction}")
 	public ResponseEntity<List<Orders>> getOrdersBySort(@PathVariable String field, @PathVariable String direction){
 		return new ResponseEntity<List<Orders>>(os.getOrdersBySorting(field,direction),HttpStatus.OK);
@@ -56,7 +64,6 @@ public class OrdersController {
 
 	@GetMapping(value = "customers/{customerId}")
 	public ResponseEntity<List<Orders>> orderHistory(@PathVariable Integer customerId){
-//		os.updateOrderStatus(customerId, null);
 		return new ResponseEntity<List<Orders>>(os.orderHistory(customerId),HttpStatus.OK);
 	}
 	

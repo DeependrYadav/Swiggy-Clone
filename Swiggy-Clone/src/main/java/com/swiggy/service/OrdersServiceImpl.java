@@ -56,8 +56,27 @@ public class OrdersServiceImpl implements OrdersService{
 	}
 
 	@Override
-	public List<Orders> getOrder() {
-		return or.findAll();
+	public List<Orders> getOrder(Integer page,Integer size,String sort,String order) {
+		Sort sort1 = null;
+		Pageable pagination = null;
+		
+		if(page == null && sort == null)return or.findAll();
+		
+		else if(page == null && sort != null) {
+			if(order.equalsIgnoreCase("asc"))sort1 = Sort.by(Sort.Direction.ASC,sort);
+			else sort1 = Sort.by(Sort.Direction.DESC,sort);
+			return or.findAll(sort1);
+		}
+		else if(sort == null && page != null) {
+			 pagination = PageRequest.of(page, size);
+			 return or.findAll(pagination).getContent();
+		}
+		else {
+			if(order.equalsIgnoreCase("asc"))sort1 = Sort.by(Sort.Direction.ASC,sort);
+			else sort1 = Sort.by(Sort.Direction.DESC,sort);
+			pagination = PageRequest.of(page, size,sort1);
+			return or.findAll(pagination).getContent();
+		}
 	}
 
 	@Override
