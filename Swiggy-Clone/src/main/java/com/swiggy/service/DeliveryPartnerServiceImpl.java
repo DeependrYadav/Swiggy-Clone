@@ -52,12 +52,14 @@ public class DeliveryPartnerServiceImpl implements DeliveryPartnerService{
 	}
 
 	@Override
+	@Deprecated
 	public List<DeliveryPartner> getDeliveryPartnerPageWise(Integer pageNumber, Integer recordsPerPage) {
 		Pageable page = PageRequest.of(pageNumber, recordsPerPage);
 		return dpr.findAll(page).getContent();
 	}
 
 	@Override
+	@Deprecated
 	public List<DeliveryPartner> getDeliveryPartnerBySorting(String field, String direction) {
 		Sort sort = direction.equalsIgnoreCase("ASC")?Sort.by(direction, field):Sort.by(direction, field);
 		return dpr.findAll(sort);
