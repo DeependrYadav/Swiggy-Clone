@@ -28,8 +28,27 @@ public class RestaurantServiceImpl implements RestaurantService{
 	}
 
 	@Override
-	public List<Restaurant> getRestaurant() {
-		return rr.findAll();
+	public List<Restaurant> getRestaurant(Integer page,Integer size,String sort,String order) {
+		Sort sort1 = null;
+		Pageable pagination = null;
+		
+		if(page == null && sort == null)return rr.findAll();
+		
+		else if(page == null && sort != null) {
+			if(order.equalsIgnoreCase("asc"))sort1 = Sort.by(Sort.Direction.ASC,sort);
+			else sort1 = Sort.by(Sort.Direction.DESC,sort);
+			return rr.findAll(sort1);
+		}
+		else if(sort == null && page != null) {
+			 pagination = PageRequest.of(page, size);
+			 return rr.findAll(pagination).getContent();
+		}
+		else {
+			if(order.equalsIgnoreCase("asc"))sort1 = Sort.by(Sort.Direction.ASC,sort);
+			else sort1 = Sort.by(Sort.Direction.DESC,sort);
+			pagination = PageRequest.of(page, size,sort1);
+			return rr.findAll(pagination).getContent();
+		}
 	}
 
 	@Override

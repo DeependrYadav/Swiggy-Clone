@@ -10,7 +10,7 @@ public interface RestaurantService {
 	
 	public Restaurant addResturant(@Valid Restaurant res);
 
-	public List<Restaurant> getRestaurant();
+	public List<Restaurant> getRestaurant(Integer page,Integer size,String sort,String order);
 
 	public List<Restaurant> getRestaurantPageWise(Integer pageNumber, Integer recordsperPage);
 
