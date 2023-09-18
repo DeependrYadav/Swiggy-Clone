@@ -52,11 +52,13 @@ public class RestaurantServiceImpl implements RestaurantService{
 	}
 
 	@Override
+	@Deprecated
 	public List<Restaurant> getRestaurantPageWise(Integer pageNumber, Integer recordsperPage) {
 		Pageable pageable = PageRequest.of(pageNumber, recordsperPage);
 		return rr.findAll(pageable).getContent();
 	}
 
+	@Deprecated
 	@Override
 	public List<Restaurant> getRestaurantBySorting(String field, String direction) {
 		Sort sort = direction.equalsIgnoreCase("ASC")?Sort.by(Sort.Direction.ASC, field):Sort.by(Sort.Direction.DESC, field);

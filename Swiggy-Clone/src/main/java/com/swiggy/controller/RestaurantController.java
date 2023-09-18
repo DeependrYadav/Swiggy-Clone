@@ -39,11 +39,13 @@ public class RestaurantController {
 		return new ResponseEntity<List<Restaurant>>(rs.getRestaurant(page,size,sort,order),HttpStatus.OK);
 	}
 	
+	@Deprecated
 	@GetMapping(value = "/resturants_by_page/{pageNumber}/{recordsperPage}")
 	public ResponseEntity<List<Restaurant>> getRestaurantPageWise(@PathVariable Integer pageNumber,@PathVariable Integer recordsperPage){
 		return new ResponseEntity<List<Restaurant>>(rs.getRestaurantPageWise(pageNumber,recordsperPage),HttpStatus.OK);
 	}
 	
+	@Deprecated
 	@GetMapping(value = "/resturants_by_sorting/{field}/{direction}")
 	public ResponseEntity<List<Restaurant>> getRestaurantBySorting(@PathVariable String field,@PathVariable String direction){
 		return new ResponseEntity<List<Restaurant>>(rs.getRestaurantBySorting(field,direction),HttpStatus.OK);
