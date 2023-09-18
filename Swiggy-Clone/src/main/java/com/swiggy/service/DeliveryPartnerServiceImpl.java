@@ -28,8 +28,27 @@ public class DeliveryPartnerServiceImpl implements DeliveryPartnerService{
 	}
 
 	@Override
-	public List<DeliveryPartner> getAllDeliveryPartner() {
-		return dpr.findAll();
+	public List<DeliveryPartner> getAllDeliveryPartner(Integer page,Integer size,String sort,String order) {
+		Sort sort1 = null;
+		Pageable pagination = null;
+		
+		if(page == null && sort == null)return dpr.findAll();
+		
+		else if(page == null && sort != null) {
+			if(order.equalsIgnoreCase("asc"))sort1 = Sort.by(Sort.Direction.ASC,sort);
+			else sort1 = Sort.by(Sort.Direction.DESC,sort);
+			return dpr.findAll(sort1);
+		}
+		else if(sort == null && page != null) {
+			 pagination = PageRequest.of(page, size);
+			 return dpr.findAll(pagination).getContent();
+		}
+		else {
+			if(order.equalsIgnoreCase("asc"))sort1 = Sort.by(Sort.Direction.ASC,sort);
+			else sort1 = Sort.by(Sort.Direction.DESC,sort);
+			pagination = PageRequest.of(page, size,sort1);
+			return dpr.findAll(pagination).getContent();
+		}
 	}
 
 	@Override

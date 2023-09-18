@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swiggy.model.DeliveryPartner;
@@ -29,8 +30,13 @@ public class DeliveryPartnerController {
 	}
 	
 	@GetMapping(value = "/deliveryPartners")
-	public ResponseEntity<List<DeliveryPartner>> getAllDeliveryPartner(){
-		return new ResponseEntity<List<DeliveryPartner>>(dps.getAllDeliveryPartner(),HttpStatus.OK);
+	public ResponseEntity<List<DeliveryPartner>> getAllDeliveryPartner(
+			@RequestParam(name = "page",required = false) Integer page,
+			@RequestParam(name = "size",required = false) Integer size,
+			@RequestParam(name = "sort",required = false) String sort,
+			@RequestParam(name = "order",required = false) String order
+			){
+		return new ResponseEntity<List<DeliveryPartner>>(dps.getAllDeliveryPartner(page,size,sort,order),HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/deliveryPartners_by_page/{pageNumber}/{recordsPerPage}")

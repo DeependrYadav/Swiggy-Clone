@@ -77,7 +77,17 @@ public class CustomerController {
 		return new ResponseEntity<List<Customer>>(cs.getCustomers(page,size,sort,order),HttpStatus.OK);
 	}
 	
+	@Deprecated
+	@GetMapping(value = "/customers_by_page/{pageNumber}/{recordsPerPage}")
+	public ResponseEntity<List<Customer>> getCustomerByPageWise(@PathVariable Integer pageNumber,@PathVariable Integer recordsPerPage){
+		return new ResponseEntity<List<Customer>>(cs.getCustomerByPageWise(pageNumber,recordsPerPage),HttpStatus.OK);
+	}
 
+	@Deprecated
+	@GetMapping(value = "/customers_by_sort/{field}/{direction}")
+	public ResponseEntity<List<Customer>> getCustomerBySorting(@PathVariable String field,@PathVariable String direction){
+		return new ResponseEntity<List<Customer>>(cs.getCustomerBySorting(field,direction),HttpStatus.OK);
+	}
 	
 	@GetMapping(value = "/signIn")
 	public ResponseEntity<String> getCustomerByEmail(Authentication auth){

@@ -9,7 +9,7 @@ import jakarta.validation.Valid;
 public interface DeliveryPartnerService {
 	
 	public DeliveryPartner addDeliveryPartner(@Valid DeliveryPartner deliveryPartner);
-	public List<DeliveryPartner> getAllDeliveryPartner();
+	public List<DeliveryPartner> getAllDeliveryPartner(Integer page,Integer size,String sort,String order);
 	public List<DeliveryPartner> getDeliveryPartnerPageWise(Integer pageNumber, Integer recordsPerPage);
 	public List<DeliveryPartner> getDeliveryPartnerBySorting(String field, String direction);
 }

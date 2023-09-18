@@ -24,6 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+	@Deprecated
 	public List<Customer> getCustomerByPageWise(Integer pageNumber, Integer recordsPerPage) {
 		Pageable page = PageRequest.of(pageNumber, recordsPerPage);
 		return cr.findAll(page).getContent();
@@ -54,6 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+	@Deprecated
 	public List<Customer> getCustomerBySorting(String field, String direction) {
 		Sort sort = null;
 		if(direction.equalsIgnoreCase("ASC"))sort = Sort.by(Sort.Direction.ASC, field);
