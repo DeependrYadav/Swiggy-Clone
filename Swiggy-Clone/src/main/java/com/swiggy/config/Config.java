@@ -52,6 +52,7 @@ public class Config {
 		.authorizeHttpRequests(auth ->{
 			
 			auth
+			.requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll() // this is for JWT on Swagger
 			.requestMatchers(HttpMethod.POST,"/customers").permitAll()
 			.requestMatchers(HttpMethod.GET,"/deliveryPartners","/deliveryPartners_by_page/{pageNumber}/{recordsPerPage}",
 					"/deliveryPartners_by_sorting/{field}/{direction}").hasRole("ADMIN")

@@ -65,7 +65,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getCustomerByEmail(String email) {
-		// TODO Auto-generated method stub
 		return cr.findByEmail(email).orElseThrow(() -> new SwiggyException("Invalid email :"+email));
 	}
 
