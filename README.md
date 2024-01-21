@@ -19,3 +19,8 @@ Welcome to the Food Delivery System Spring Boot Application! This application is
   - Assign a Delivery Partner to an Order.
   - Update the order status (e.g., cooking, on the way, delivered).
   - Fetch a Customer's order history.
+
+### ER-Diagram
+</br>
+
+![ER-Diagram](./image/Database_Schema.png)
