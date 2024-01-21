@@ -24,3 +24,7 @@ Welcome to the Food Delivery System Spring Boot Application! This application is
 </br>
 
 ![ER-Diagram](./image/Database_Schema.png)
+
+### Database Schema
+
+![Database-Schema](./image/DatabaseSchema.png)
